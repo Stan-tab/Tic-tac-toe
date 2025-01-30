@@ -1,0 +1,19 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.into {
+    display: grid;
+    grid-template: repeat(3, 1fr)/ repeat(3, 1fr);
+    width: 45vw;
+    height: 45vw;
+}
+
+.into > * {
+    background-color: rgb(74, 74, 109);
+    outline: 5px solid black;
+    font-size: 12vw;
+    text-align: center;
+}

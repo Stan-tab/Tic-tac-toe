@@ -4,6 +4,7 @@ const gameStart = (() => {
                    [0, 0, 0]];
   const gamers = [];
   const queue =  [];
+  const win = [];
 
   function newPlayer(name, sign) {
     this.name = name;
@@ -17,6 +18,7 @@ const gameStart = (() => {
   }
 
   const adder = (pos) => {
+    if(win != 0){alert("restart the game to play again"); return 0}
     if(pos.length != 2) {console.error("Invalid size of array"); return 1;};
     if(pos[0]>2 || pos[0]<0 || pos[1]>2 || pos[1]<0) {console.error("Invalid number of value"); return 1;};
     if(arrayList[pos[0]][pos[1]] != 0){console.error("Can not add properties it is full"); return 1;};
@@ -27,6 +29,7 @@ const gameStart = (() => {
       arrayList[pos[0]][pos[1]] = gamers[1].sign;
       queue[0] = 0;
     }
+    UI(pos[0]*3+pos[1]+1, !queue[0]);
     winCheck(pos, Number(!queue[0]))
   }
 
@@ -36,19 +39,32 @@ const gameStart = (() => {
     let y = 0;
     let xy1 = 0;
     let xy2 = 0;
+    let ar = 0;
     for (let i = 0; i<3; i++){
       if(value == arrayList[i][pos[1]]) x++;
       if(value == arrayList[pos[0]][i]) y++;
       if(value == arrayList[i][i]) xy1++;
       if(value == arrayList[i][2-i]) xy2++;
     }
-    if(x==3 || y == 3 || xy1 == 3 || xy2 == 3) {console.log(`${gamers[winner].name} win`);  return 0}
+    if(x==3 || y == 3 || xy1 == 3 || xy2 == 3) {console.log(`${gamers[winner].name} win`); win[0] = 1; return 0}
+    arrayList.forEach(el => {
+      el.forEach(e => {
+        if (e != 0) ar++;
+      })
+    })
+    if(ar==9) {alert("Draw! Restart the game"); return 0}
+  }
+
+  function UI(num, sign) {
+    const div = document.querySelector(`.into > .d${num}`);
+    sign ? div.textContent = "O" : div.textContent = "X";
   }
 
   function restart () {
     arrayList.forEach(el => {
       arrayList[arrayList.indexOf(el)] = [0, 0, 0];
     })
+    win[0] = 0;
   }
   return {arrayList, adder, restart, playerCreator};
 })()
