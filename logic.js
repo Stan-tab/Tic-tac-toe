@@ -34,11 +34,15 @@ const gameStart = (() => {
     let value = arrayList[pos[0]][pos[1]];
     let x = 0;
     let y = 0;
+    let xy1 = 0;
+    let xy2 = 0;
     for (let i = 0; i<3; i++){
       if(value == arrayList[i][pos[1]]) x++;
       if(value == arrayList[pos[0]][i]) y++;
+      if(value == arrayList[i][i]) xy1++;
+      if(value == arrayList[i][2-i]) xy2++;
     }
-    if(x==3 || y == 3) {console.log(`${gamers[winner].name} win`);  return 0}
+    if(x==3 || y == 3 || xy1 == 3 || xy2 == 3) {console.log(`${gamers[winner].name} win`);  return 0}
   }
 
   function restart () {
