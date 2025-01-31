@@ -1,4 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .main {
+    padding-top: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,4 +22,42 @@
     outline: 5px solid black;
     font-size: 12vw;
     text-align: center;
+}
+
+.begin {
+    width: 100vw;
+    height: clamp(100vh, 46vw, 100vw);
+    background-color: rgb(154, 241, 241);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 1.3rem;
+    font-weight: bold;
+    /* display: none; */
+}
+
+.begin > div{
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.begin input{
+    background-color: aquamarine;
+    border: solid 2px;
+    border-radius: 4px;
+    width: 8rem;
+    height: 1.2rem;
+}
+
+#one {
+    margin-left: 20px;
+}
+
+.begin button{
+    font-weight: bold;
+    background-color: rgb(235, 234, 171);
+    height: 2rem;
 }
