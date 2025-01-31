@@ -5,11 +5,23 @@ const gameStart = (() => {
   const gamers = [];
   const queue =  [];
   const win = [];
+  const confBut = document.querySelector(".confirmer");
 
   function newPlayer(name, sign) {
     this.name = name;
     this.sign = sign;
   }
+
+  confBut.addEventListener("click", () => {
+    const beg = document.querySelector(".begin");
+    let inpPlayer1 = document.querySelector("#one").value;
+    let inpPlayer2 = document.querySelector("#two").value;
+    !inpPlayer1 ? inpPlayer1 = "Anonymus 1": inpPlayer1;
+    !inpPlayer2 ? inpPlayer2 = "Anonymus 2": inpPlayer2;
+    playerCreator(inpPlayer1);
+    playerCreator(inpPlayer2);
+    beg.style.display = "none";
+  });
 
   const playerCreator = (name) => {
     if(gamers.length >= 2) {console.error("Game is full"); return 1;};
@@ -30,7 +42,12 @@ const gameStart = (() => {
       queue[0] = 0;
     }
     UI(pos[0]*3+pos[1]+1, !queue[0]);
-    winCheck(pos, Number(!queue[0]))
+    if (winCheck(pos, Number(!queue[0]))) {
+      const changeHelp = gamers[0].name;
+      queue[0] = 0;
+      gamers[0].name = gamers[1].name;
+      gamers[1].name = changeHelp;
+    }
   }
 
   function winCheck(pos, winner) {
@@ -46,13 +63,14 @@ const gameStart = (() => {
       if(value == arrayList[i][i]) xy1++;
       if(value == arrayList[i][2-i]) xy2++;
     }
-    if(x==3 || y == 3 || xy1 == 3 || xy2 == 3) {console.log(`${gamers[winner].name} win`); win[0] = 1; return 0}
+    if(x==3 || y == 3 || xy1 == 3 || xy2 == 3) {alert(`${gamers[winner].name} win`); win[0] = 1; return true}
     arrayList.forEach(el => {
       el.forEach(e => {
         if (e != 0) ar++;
       })
     })
-    if(ar==9) {alert("Draw! Restart the game"); return 0}
+    if(ar==9) {alert("Draw! Restart the game"); return true}
+    return false;
   }
 
   function UI(num, sign) {
@@ -61,8 +79,12 @@ const gameStart = (() => {
   }
 
   function restart () {
+    const divs = [...document.querySelectorAll(`.into > div`)];
     arrayList.forEach(el => {
       arrayList[arrayList.indexOf(el)] = [0, 0, 0];
+    })
+    divs.forEach(el => {
+      el.textContent = "";
     })
     win[0] = 0;
   }

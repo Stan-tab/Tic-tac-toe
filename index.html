@@ -16,7 +16,7 @@
             <label for="two">Second player name:
                 <input type="text" id="two">
             </label>
-            <button>Confirm</button>
+            <button class="confirmer">Confirm</button>
         </div>
     </div>
     <div class="main">
@@ -31,6 +31,7 @@
             <div onclick="gameStart.adder([2, 1])" class="d8"></div>
             <div onclick="gameStart.adder([2, 2])" class="d9"></div>
         </div>
+        <button onclick="gameStart.restart()">Press to restart</button>
     </div>
 </body>
 </html>

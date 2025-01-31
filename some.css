@@ -8,6 +8,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .into {
@@ -38,7 +39,7 @@ body {
 }
 
 .begin > div{
-    margin-top: 10vh;
+    margin-top: 15vh;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -56,7 +57,8 @@ body {
     margin-left: 20px;
 }
 
-.begin button{
+.begin button,
+.main button{
     font-weight: bold;
     background-color: rgb(235, 234, 171);
     height: 2rem;
