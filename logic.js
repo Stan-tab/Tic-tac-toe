@@ -63,7 +63,7 @@ const gameStart = (() => {
       if(value == arrayList[i][i]) xy1++;
       if(value == arrayList[i][2-i]) xy2++;
     }
-    if(x==3 || y == 3 || xy1 == 3 || xy2 == 3) {alert(`${gamers[winner].name} win! \nNow ${gamers[1].name} turn`); win[0] = 1; return true}
+    if(x==3 || y == 3 || xy1 == 3 || xy2 == 3) {alert(`${gamers[winner].name} win! \nNow ${gamers[1].name} go first`); win[0] = 1; return true}
     arrayList.forEach(el => {
       el.forEach(e => {
         if (e != 0) ar++;
@@ -75,7 +75,13 @@ const gameStart = (() => {
 
   function UI(num, sign) {
     const div = document.querySelector(`.into > .d${num}`);
-    sign ? div.textContent = "O" : div.textContent = "X";
+    if(sign) {
+      div.textContent = "O";
+      div.style.color = "#2c88ff";
+    } else {
+      div.textContent = "X";
+      div.style.color = "#e5392f";
+    }
   }
 
   function restart () {
